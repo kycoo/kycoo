@@ -10,9 +10,9 @@ public class App
     {
 		System.out.println("heikai");
     	System.out.println("zhangwang");
-    	System.out.print("132457689");
     	System.out.println("132457689");
         System.out.println( "Hello World!" );
         System.out.println( "zouyang" );
+        
     }
 }

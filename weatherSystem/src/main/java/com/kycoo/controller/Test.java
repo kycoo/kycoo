@@ -1,0 +1,16 @@
+package com.kycoo.controller;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+@Controller
+public class Test {
+
+	@GetMapping(name="/test")
+	@ResponseBody
+	public String test(){
+		
+		return "hellosdas";
+	}
+}

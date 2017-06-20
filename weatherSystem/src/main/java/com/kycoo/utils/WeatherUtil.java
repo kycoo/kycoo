@@ -11,7 +11,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.kycoo.domain.Weather;
-
+import com.kycoo.po.*;
 public final class WeatherUtil {
 	
 	private WeatherUtil() {
@@ -56,7 +56,7 @@ public final class WeatherUtil {
 	    	jsonObject = jsonObject.getJSONObject("showapi_res_body");
 	    	jsonObject.getJSONObject("now");
 	    	System.out.println(jsonObject.getString("f1").toString());
-//	    	JSONObject.parseObject(jsonObject.getString("f1").toString(), WeatherDay.class);
+	    	//JSONObject.parseObject(jsonObject.getString("f1").toString(),WeatherDay.class);
 //	    	JSONObject.p
 	    } catch (Exception e) {
 	    	e.printStackTrace();

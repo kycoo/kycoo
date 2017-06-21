@@ -40,6 +40,16 @@ public class Weather {
 	
 	private Date upDateTime; //天气更新时间
 
+	private boolean isDay;//是不是某天的天气{t,f}
+
+	public boolean isDay() {
+		return isDay;
+	}
+
+	public void setDay(boolean isDay) {
+		this.isDay = isDay;
+	}
+
 	public Integer getId() {
 		return id;
 	}
@@ -111,6 +121,7 @@ public class Weather {
 	public void setUpDateTime(Date upDateTime) {
 		this.upDateTime = upDateTime;
 	}
-	
+
+
 	
 }

@@ -10,14 +10,13 @@ import java.util.Map;
 import org.apache.http.HttpResponse;
 import org.apache.http.util.EntityUtils;
 
-import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.kycoo.po.CityInfo;
 import com.kycoo.po.DayWeather;
 import com.kycoo.po.HourWeather;
+
 import com.kycoo.domain.City;
-import com.kycoo.domain.Province;
 import com.kycoo.domain.Weather;
 
 public final class WeatherUtil {
@@ -31,7 +30,7 @@ public final class WeatherUtil {
 	
 	private static final String APP_CODE="6b8c74b1ee014586b0dda28a56d487b9";
 	private static final String METHORD_GET="GET";
-	private static final String METHORD_POST="POST";
+	//private static final String METHORD_POST="POST";
 	static{
 		HEADERS = new HashMap<>();
 		HEADERS.put("Authorization", "APPCODE " +APP_CODE);
@@ -123,7 +122,6 @@ public final class WeatherUtil {
 		    	return jsonString;
 		    }
 			return jsonString;
-			
 		}
 	
 	
@@ -150,9 +148,7 @@ public final class WeatherUtil {
 	    		weather.setCity(city);
 				weathers.add(weather);
 	    	}
-		}
-		
-		
+		}	
 		return weathers;  
 	}
 	

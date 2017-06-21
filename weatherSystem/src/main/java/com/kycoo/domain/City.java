@@ -9,9 +9,9 @@ import javax.persistence.Table;
 
 /**
  * 
- * @author 寮犳豹
+ * @author 张汪
  *
- *	鍩庡競绫伙紝鎻忚堪鍩庡競鍩烘湰淇℃伅
+ *	city基本数据信息
  */
 
 @Entity

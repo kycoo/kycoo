@@ -1,9 +1,8 @@
-package com.kycoo.po;
-
+package com.kycoo.utils;
 
 import java.io.Serializable;
 
-class DayWeather implements Serializable{
+class DayWeather implements Serializable {
 	/**
 	 * 
 	 */

@@ -12,8 +12,8 @@ import javax.persistence.Table;
 
 /**
  * 
- * @author 张汪
- *	描述天气实体
+ * @author 寮犳豹
+ *	澶╂皵绫伙紝鎻忚堪澶╂皵鍩烘湰淇℃伅
  */
 @Entity
 @Table(name="tb_weather")
@@ -21,24 +21,24 @@ public class Weather {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id; //天气编号，数据库唯一标示
+	private Integer id; //澶╂皵缂栧彿示
 	
 	private Integer highTemp;
 	private Integer lowTemp;
 	
-	private Date date; //该时间的天气
+	private Date date; //鏃堕棿锛屽ぉ姘斿搴旂殑鏃堕棿
 	
 	@ManyToOne
 	@JoinColumn(name="cid")
-	private City city; //城市;
+	private City city; //鍩庡競;
 	
-	private String weather;//天气
+	private String weather;//澶╂皵
 	
-	private Integer quality; //空气质量
+	private Integer quality; //绌烘皵璐ㄩ噺
 	
-	private String windDirection;//风向
+	private String windDirection;//椋庡悜
 	
-	private Date upDateTime; //获取天气的时间
+	private Date upDateTime; //鏇存柊鏃堕棿
 
 	public Integer getId() {
 		return id;

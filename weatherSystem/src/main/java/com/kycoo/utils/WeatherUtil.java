@@ -11,7 +11,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.kycoo.domain.Weather;
-import com.kycoo.po.*;
+
 public final class WeatherUtil {
 	
 	private WeatherUtil() {
@@ -29,7 +29,7 @@ public final class WeatherUtil {
 	    String path = "/ip-to-weather";
 	    String method = "GET";
 	    Map<String, String> headers = new HashMap<String, String>();
-	    //×îºóÔÚheaderÖĞµÄ¸ñÊ½(ÖĞ¼äÊÇÓ¢ÎÄ¿Õ¸ñ)ÎªAuthorization:APPCODE 83359fd73fe94948385f570e3c139105
+	    //æœ€ååœ¨headerä¸­çš„æ ¼å¼(ä¸­é—´æ˜¯è‹±æ–‡ç©ºæ ¼)ä¸ºAuthorization:APPCODE 83359fd73fe94948385f570e3c139105
 	    headers.put("Authorization", "APPCODE " + APP_CODE);
 	    Map<String, String> querys = new HashMap<String, String>();
 	    querys.put("ip", ip);
@@ -40,23 +40,23 @@ public final class WeatherUtil {
 	    querys.put("needMoreDay", "0");
 	    try {
 	    	/**
-	    	* ÖØÒªÌáÊ¾ÈçÏÂ:
-	    	* HttpUtilsÇë´Ó
+	    	* é‡è¦æç¤ºå¦‚ä¸‹:
+	    	* HttpUtilsè¯·ä»
 	    	* https://github.com/aliyun/api-gateway-demo-sign-java/blob/master/src/main/java/com/aliyun/api/gateway/demo/util/HttpUtils.java
-	    	* ÏÂÔØ
+	    	* ä¸‹è½½
 	    	*
-	    	* ÏàÓ¦µÄÒÀÀµÇë²ÎÕÕ
+	    	* ç›¸åº”çš„ä¾èµ–è¯·å‚ç…§
 	    	* https://github.com/aliyun/api-gateway-demo-sign-java/blob/master/pom.xml
 	    	*/
 	    	HttpResponse response = HttpUtils.doGet(HOST, path, method, headers, querys);
 	    	System.out.println(response.toString());
-	    	//»ñÈ¡responseµÄbody
+	    	//è·å–responseçš„body
 	    	String jsonString = EntityUtils.toString(response.getEntity());
 	    	JSONObject  jsonObject = JSONObject.parseObject(jsonString);
 	    	jsonObject = jsonObject.getJSONObject("showapi_res_body");
 	    	jsonObject.getJSONObject("now");
 	    	System.out.println(jsonObject.getString("f1").toString());
-	    	//JSONObject.parseObject(jsonObject.getString("f1").toString(),WeatherDay.class);
+	    	JSONObject.parseObject(jsonObject.getString("f1").toString(),DayWeather.class);
 //	    	JSONObject.p
 	    } catch (Exception e) {
 	    	e.printStackTrace();

@@ -9,9 +9,9 @@ import javax.persistence.Table;
 
 /**
  * 
- * @author 张汪
+ * @author 寮犳豹
  *
- *	城市类，描述城市的基本信息
+ *	鍩庡競绫伙紝鎻忚堪鍩庡競鍩烘湰淇℃伅
  */
 
 @Entity
@@ -20,16 +20,16 @@ public class City {
 	
 	@Id
 	@Column(length=10)
-	private String id;//城市id
+	private String id;//鍩庡競id
 	
-	private String cityName;//城市名称
+	private String cityName;//鍩庡競鍚嶇О
 	
-	private Double longitude;//经度
-	private Double latitude;//纬度
+	private Double longitude;//鍩庡競缁忓害
+	private Double latitude;//鍩庡競绾害
 	
 	@ManyToOne
 	@JoinColumn(name="pid")
-	private Province province; //省
+	private Province province; //鐪佷唤
 
 	public Province getProvince() {
 		return province;

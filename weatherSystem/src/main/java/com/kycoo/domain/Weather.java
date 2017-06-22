@@ -20,7 +20,7 @@ import javax.persistence.Table;
 public class Weather {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer id; //ÌìÆø±àºÅ
 	
 	private Integer highTemp;

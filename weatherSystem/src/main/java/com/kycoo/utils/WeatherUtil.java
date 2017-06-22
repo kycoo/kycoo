@@ -1,5 +1,6 @@
 package com.kycoo.utils;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -14,6 +15,7 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.kycoo.po.CityInfo;
 import com.kycoo.po.DayWeather;
+import com.kycoo.po.HalfMonthWeather;
 import com.kycoo.po.HourWeather;
 
 import com.kycoo.domain.City;
@@ -76,26 +78,7 @@ public final class WeatherUtil {
 
     	return weathers;
 	}
-	/**
-	 * 
-	 * @param dateString "2017 06 22 00 00 00"
-	 * @return
-	 */
-	public static Date convetString2Date(String dateString){
-		for(int i=dateString.length();i<14;i++){
-			dateString += "0";
-		}
-		System.out.println(dateString);
-		Calendar calendar = Calendar.getInstance();
-		calendar.set(Integer.valueOf(dateString.substring(0, 4)), 
-				Integer.valueOf(dateString.substring(4, 6)), 
-				Integer.valueOf(dateString.substring(6, 8)), 
-				Integer.valueOf(dateString.substring(8, 10)), 
-				Integer.valueOf(dateString.substring(10, 12)), 
-				Integer.valueOf(dateString.substring(12)));
-		return calendar.getTime();
-	}
-
+	
 	private static String getJson(String path,Map<String, String> querys){
 		return getJson(path, querys, METHORD_GET, HEADERS, HOST);
 	}
@@ -126,7 +109,7 @@ public final class WeatherUtil {
 	
 	
 	
-	public static List<Weather> get24HourWeatherByArea(String areaName,String areaId) {
+	public static List<Weather> list24HourWeatherByArea(String areaName,String areaId) {
 		List<Weather> weathers = new ArrayList<>();
 		String path = "/hour24";
 		Map<String, String> querys = new HashMap<String, String>();
@@ -152,4 +135,30 @@ public final class WeatherUtil {
 		return weathers;  
 	}
 	
+	public static List<Weather> listHalfMonthweather(String areaName,String areaId) {
+		List<Weather> weathers = new ArrayList<>();
+		String path = "/day15";
+		Map<String, String> querys = new HashMap<String, String>();
+		querys.put("area", areaName);
+		querys.put("areaid", areaId);
+		String jsonString = getJson(path, querys);
+		if(jsonString != null){
+			JSONObject jsonObject = JSONObject.parseObject(jsonString);
+			jsonObject = jsonObject.getJSONObject("showapi_res_body");
+	    	City city = new City();
+	    	city.setCityName(jsonObject.getString("area"));
+	    	city.setId(jsonObject.getString("areaid"));
+	    	
+	    	JSONArray jsonArray =jsonObject.getJSONArray("dayList");
+	    	Weather weather = null;
+	    	for (int i = 0; i < jsonArray.size(); i++) {
+	    		weather = jsonArray.getObject(i, HalfMonthWeather.class)
+	    				.getWeatherFormObj();
+	    		weather.setCity(city);
+	    		
+				weathers.add(weather);
+	    	}
+		}
+		return weathers;
+	}
 }

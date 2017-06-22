@@ -1,7 +1,16 @@
 package com.kycoo.service;
 
+import java.util.List;
+
+import com.kycoo.domain.City;
 import com.kycoo.domain.Weather;
 
 public interface WeatherService {
-	String getWeather(Weather weather);
+	Weather getTodayWeatherByCity(City city);
+	
+	List<Weather> getAfterWeekWeather(City city);
+	
+	List<Weather> getAfterHalfMonthWeather(City city);
+	
+	List<Weather> getAfter24HoursWeather(City city);
 }

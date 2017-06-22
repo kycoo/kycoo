@@ -20,16 +20,16 @@ public class City {
 	
 	@Id
 	@Column(length=10)
-	private String id;//鍩庡競id
+	private String id;//城市编号
 	
-	private String cityName;//鍩庡競鍚嶇О
+	private String cityName;//城市名称
 	
-	private Double longitude;//鍩庡競缁忓害
-	private Double latitude;//鍩庡競绾害
+	private Double longitude;//经度
+	private Double latitude;//纬度
 	
 	@ManyToOne
 	@JoinColumn(name="pid")
-	private Province province; //鐪佷唤
+	private Province province; //省份
 
 	public Province getProvince() {
 		return province;

@@ -6,6 +6,8 @@ import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import com.kycoo.persistence.BaseDao;
 
+
+@SuppressWarnings("unchecked")
 public abstract class BaseDaoHibernateAdapter<E, K extends Serializable> implements BaseDao<E, K> {
 	@Autowired
 	protected SessionFactory sessionFactory;
@@ -18,6 +20,7 @@ public abstract class BaseDaoHibernateAdapter<E, K extends Serializable> impleme
 		entityType = (Class<E>) pt.getActualTypeArguments()[0];
 		entityTypeName = entityType.getSimpleName();
 	}
+	
 	
 	@Override
 	public K save(E entity) {

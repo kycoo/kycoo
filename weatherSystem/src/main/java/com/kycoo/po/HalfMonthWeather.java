@@ -2,10 +2,8 @@ package com.kycoo.po;
 
 import java.util.Date;
 
-import com.kycoo.domain.City;
 import com.kycoo.domain.Weather;
 import com.kycoo.utils.CommonUtil;
-import com.kycoo.utils.WeatherUtil;
 
 public class HalfMonthWeather implements GetWeatherAble{
 

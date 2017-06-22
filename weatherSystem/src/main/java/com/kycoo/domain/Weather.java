@@ -17,7 +17,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name="tb_weather")
-public class Weather {
+public class Weather implements Comparable<Weather>{
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -120,6 +120,11 @@ public class Weather {
 
 	public void setUpDateTime(Date upDateTime) {
 		this.upDateTime = upDateTime;
+	}
+
+	@Override
+	public int compareTo(Weather o) {
+		return date.after(o.getDate()) ? 1 : 0;
 	}
 
 

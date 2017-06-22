@@ -14,7 +14,7 @@ import com.kycoo.utils.WeatherUtil;
 /**
  * Unit test for simple App.
  */
-public class TestUtils {
+public class UtilsTest {
 	
 	@Test
 	public void testListThisWeekWeatherByIp(){

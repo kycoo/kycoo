@@ -24,7 +24,7 @@ import com.kycoo.utils.WeatherUtil;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations={"classpath:app.xml"})
-public class TestPersistence {
+public class PersistenceTest {
 	@Autowired
 	SessionFactory sessionFactory;
 	private Transaction tx;

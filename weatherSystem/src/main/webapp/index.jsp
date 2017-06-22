@@ -14,7 +14,7 @@
 		<meta name="viewport" content="width=device-width,initial-scale=1" />
 
 		<!-- Style -->
-		<link rel="stylesheet" type="text/css" href="css/style.css" />
+		<link rel="stylesheet" type="text/css" href="./css/style.css" />
 
 	</head>
 
@@ -47,25 +47,6 @@
 			</div>
 			<!-- //City -->
 
-			<!-- Forecast -->
-			<div class="forecast">
-				<!--temperature：图片显示-->
-				<div class="forecast-icon">
-					<img src="images/forecast.png" alt="New York Weather Widget">
-				</div>
-				<div class="today-weather">
-					<!--temperature-->
-					<h3>天气情况</h3>
-					<ul>
-						<li>今天 <span> 20°C</span></li>
-						<li>09:00 <span> 22°C</span></li>
-						<li>12:00 <span> 24°C</span></li>
-						<li>15:00 <span> 23°C</span></li>
-						<li>18:00 <span> 20°C</span></li>
-					</ul>
-				</div>
-			</div>
-			<!-- //Forecast -->
 			<div class="clear"></div>
 		</div>
 		<!-- //Container -->

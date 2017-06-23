@@ -27,10 +27,15 @@ public class WeatherServiceImpl implements WeatherService {
 
 	@Override
 	public Weather getTodayWeatherByCity(City city) {
-		return weatherDao.getWeather(city, 
+		Weather weather = weatherDao.getWeather(city, 
 				CommonUtil.getTodayStartDate(),
 				true,
 				1).get(0);
+//		//超过24小时自动更新
+//		if (new Date().getTime() - weather.getDate().getTime() > 12*60*60*1000) {
+//			Weather newWeather = WeatherUtil.
+//		}
+		return weather;
 	}
 
 	@Override
@@ -60,17 +65,15 @@ public class WeatherServiceImpl implements WeatherService {
 		if (weathers.size() < 23) {
 			List<Weather> ws = WeatherUtil.list24HourWeatherByArea(city.getCityName(), city.getId());
 			Collections.sort(ws);
-			Weather w1 =  null,w2=null;
-			int j = 0;
-			for(int i=0;i<weathers.size();i++){
+			Weather w1 = null,w2 = null;
+			int j = 0,i = 0;
+			for(;j<weathers.size()&&i<ws.size();i++){
 				w1 = weathers.get(j++);
 				w2 = ws.get(i);
 				if(w2.getDate().before(w1.getDate())){
-//					System.out.println(ws.get(i).getDate());
-//					System.out.println(w.getDate());
 					j--;
 					continue;
-				}else if (w2.equals(w1.getDate())) {
+				}else if (w2.getDate().equals(w1.getDate())) {
 					w2.setHighTemp(w1.getHighTemp());
 					w2.setWeather(w1.getWeather());
 					w2.setUpDateTime(w1.getUpDateTime());
@@ -79,10 +82,11 @@ public class WeatherServiceImpl implements WeatherService {
 				}else{
 					
 				}
-				
-				for(;j<ws.size();i++){
-					weathers.add(ws.get(j));
-				}
+			}
+			for(;i<ws.size();i++){
+				w2 = ws.get(i);
+				weatherDao.save(w2);
+				weathers.add(w2);
 				
 			}
 			

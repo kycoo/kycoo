@@ -40,4 +40,10 @@ public final class CommonUtil {
 	public static Date formatDate(Date date){
 		return new Date(date.getTime() / 1000 * 1000);
 	}
+	
+	public static Date getCurentHour() {
+//		Calendar calendar = Calendar.getInstance();
+//		calendar.set(Calendar.MINUTE, Cla);
+		return null;
+	}
 }

@@ -62,7 +62,7 @@ public class WeatherServiceTest {
 		Assert.assertNotNull(ws);
 		System.out.println(ws.size());
 		for(Weather w:ws){
-			//System.out.println(w.getDate());
+			System.out.println(w.getDate());
 		}
 	}
 }

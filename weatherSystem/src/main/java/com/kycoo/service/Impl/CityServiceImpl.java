@@ -44,6 +44,12 @@ public class CityServiceImpl implements CityService{
 		
 		return city;
 	}
+
+	@Override
+	public List<City> getAllCity() {
+		// TODO Auto-generated method stub
+		return cityDao.findAll();
+	}
 	
 
 }

@@ -26,7 +26,6 @@
 		<h1>Kycoo天气</h1>
 		<!-- //Headng -->
 
-		<!-- Container -->
 			<div class="city">
 			<div class="date-time">	
 				<div class="dmy">

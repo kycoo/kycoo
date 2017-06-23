@@ -19,4 +19,10 @@ public class CityServiceTest {
 	public void testGetCityById(){
 		System.out.println(cityService.getCityById("101270101").getCityName());
 	}
+	
+	@Test
+	public void testGetCityByName(){
+		
+		cityService.getCityByName("³É¶¼");
+	}
 }

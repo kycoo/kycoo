@@ -27,6 +27,9 @@ implements WeatherDao
 				.getResultList();
 	}
 
+	
+	
+
 
 	
 }

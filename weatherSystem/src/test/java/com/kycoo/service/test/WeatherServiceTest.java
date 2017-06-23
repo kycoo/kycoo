@@ -24,7 +24,7 @@ public class WeatherServiceTest {
 	public void init(){
 		city = new City();
 		city.setId("101270101");
-//		city.setCityName("³É¶¼");
+//		city.setCityName("ÁúÈªæä");
 	}
 	
 	@Autowired

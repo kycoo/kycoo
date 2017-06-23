@@ -1,9 +1,6 @@
 package com.kycoo.utils;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -160,5 +157,50 @@ public final class WeatherUtil {
 	    	}
 		}
 		return weathers;
+	}
+	
+	
+	public static List<City> getCityByName(String cityName){
+		List<City> cities = new ArrayList<>();
+		String path = "/area-to-id";
+		Map<String, String> querys = new HashMap<String, String>();
+		querys.put("area", cityName);
+		
+		String jsonString = getJson(path, querys);
+		
+		
+		if(jsonString != null){
+			JSONObject jsonObject = JSONObject.parseObject(jsonString);
+			jsonObject = jsonObject.getJSONObject("showapi_res_body");
+			System.out.println(jsonObject.toJSONString());
+			JSONArray jsonArray =jsonObject.getJSONArray("list");
+			City city = null;
+			for (int i = 0; i < jsonArray.size(); i++) {
+				city = JSONObject.parseObject(
+						jsonArray.getJSONObject(i).getString("cityInfo")
+						,CityInfo.class)
+				.getCity();
+				if (city != null) {
+					cities.add(city);
+				}	
+	    	}
+		}
+		return cities;
+	}
+	
+	public static List<Weather> listWeathersByCity(City city){
+		List<Weather> weathers = new ArrayList<>();
+		String path = "/area-to-weather";
+		Map<String, String> querys = new HashMap<String, String>();
+		querys.put("area", city.getCityName());
+		querys.put("areaid", city.getId());
+		querys.put("need3HourForcast", "0");
+		querys.put("needAlarm", "0");
+		querys.put("needHourData", "0");
+		querys.put("needIndex", "0");
+		querys.put("needMoreDay", "1");
+		String jsonString =getJson(path, querys);
+	    weathers = parserJson2WeekWeather(jsonString);
+	    return weathers;
 	}
 }

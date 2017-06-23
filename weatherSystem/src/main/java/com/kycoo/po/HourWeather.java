@@ -55,7 +55,8 @@ public class HourWeather implements GetWeatherAble{
 	@Override
 	public Weather getWeatherFormObj() {
 		Weather w = new Weather();
-		w.setDate(CommonUtil.convetString2Date(time));
+		w.setDate(CommonUtil.formatDate(
+				CommonUtil.convetString2Date(time)));
 		w.setHighTemp(temperature);
 		w.setWeather(weather);
 		w.setWindDirection(wind_direction);

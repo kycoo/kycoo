@@ -7,6 +7,7 @@ import java.util.List;
 
 import org.junit.Test;
 
+import com.kycoo.domain.City;
 import com.kycoo.domain.Weather;
 import com.kycoo.utils.CommonUtil;
 import com.kycoo.utils.WeatherUtil;
@@ -52,4 +53,16 @@ public class UtilsTest {
 		System.out.println(date);
 	}
 	
+	@Test
+	public void getCityByName(){
+		List<City> cities = WeatherUtil.getCityByName("³É¶¼");
+		for(int i=0;i<cities.size();i++){
+			
+			System.out.println(cities.get(i).getId());
+			System.out.println(cities.get(i).getCityName());
+		}
+		System.out.println(cities.size());
+//		System.out.println(city.getId());
+		
+	}
 }

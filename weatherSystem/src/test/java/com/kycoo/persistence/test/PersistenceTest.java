@@ -1,6 +1,5 @@
 package com.kycoo.persistence.test;
 
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 

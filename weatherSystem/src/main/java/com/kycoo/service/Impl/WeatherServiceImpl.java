@@ -1,8 +1,5 @@
 package com.kycoo.service.Impl;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -27,30 +24,41 @@ public class WeatherServiceImpl implements WeatherService {
 
 	@Override
 	public Weather getTodayWeatherByCity(City city) {
-		Weather weather = weatherDao.getWeather(city, 
+		List<Weather> weathers =  weatherDao.getWeather(city, 
 				CommonUtil.getTodayStartDate(),
 				true,
-				1).get(0);
-//		//超过24小时自动更新
-//		if (new Date().getTime() - weather.getDate().getTime() > 12*60*60*1000) {
-//			Weather newWeather = WeatherUtil.
-//		}
-		return weather;
+				1);
+		if (weathers.size() == 0) {
+			weathers = updateAfterHalfMonthWeather(city);
+		}
+		
+		return weathers.get(0);
 	}
 
 	@Override
 	public List<Weather> getAfterWeekWeather(City city) {
-		
-		return weatherDao.getWeather(city, 
-				CommonUtil.getTodayStartDate(), 
-				true, 7);
+		List<Weather> weathers= weatherDao.getWeather(city, 
+					CommonUtil.getTodayStartDate(), 
+					true, 7);
+		if(weathers.size() != 7){
+			weathers = updateAfterHalfMonthWeather(city);
+			for(int i = 7 ; i < 15 ; i++){
+				weathers.remove(i);
+			}
+		}
+		return weathers;
 	}
 
 	@Override
 	public List<Weather> getAfterHalfMonthWeather(City city) {
-		return weatherDao.getWeather(city, 
+		
+		List<Weather> weathers = weatherDao.getWeather(city, 
 				CommonUtil.getTodayStartDate(), 
 				true, 15);
+		if(weathers.size() != 15){
+			updateAfterHalfMonthWeather(city);
+		}
+		return weathers;
 	}
 
 	/**
@@ -63,33 +71,46 @@ public class WeatherServiceImpl implements WeatherService {
 				false, 23);
 		//没有足够的数据(暂未更新)
 		if (weathers.size() < 23) {
-			List<Weather> ws = WeatherUtil.list24HourWeatherByArea(city.getCityName(), city.getId());
-			Collections.sort(ws);
-			Weather w1 = null,w2 = null;
-			int j = 0,i = 0;
-			for(;j<weathers.size()&&i<ws.size();i++){
-				w1 = weathers.get(j++);
-				w2 = ws.get(i);
-				if(w2.getDate().before(w1.getDate())){
-					j--;
-					continue;
-				}else if (w2.getDate().equals(w1.getDate())) {
-					w2.setHighTemp(w1.getHighTemp());
-					w2.setWeather(w1.getWeather());
-					w2.setUpDateTime(w1.getUpDateTime());
-					w2.setLowTemp(w1.getLowTemp());
-					w2.setWindDirection(w1.getWindDirection());
-				}else{
-					
-				}
-			}
-			for(;i<ws.size();i++){
-				w2 = ws.get(i);
-				weatherDao.save(w2);
-				weathers.add(w2);
-				
-			}
-			
+			System.out.println("数据不够");
+			return updateAfter24HourWeather(city);
+		}
+		return weathers;
+	}
+
+	@Override
+	public List<Weather> updateAfterHalfMonthWeather(City city) {
+		deleteDayWeatherByCity(city);
+		List<Weather> weathers = WeatherUtil.listHalfMonthweather(city.getCityName(), city.getId());
+		for(Weather w:weathers){
+			weatherDao.save(w);
+		}
+		return weathers;
+	}
+
+
+	@Override
+	public void deleteDayWeatherByCity(City city) {
+		List<Weather> weathers = weatherDao.getWeather(city, 
+				CommonUtil.getTodayStartDate(), 
+				true,
+				15);
+		for(Weather w:weathers){
+			weatherDao.delete(w);;
+		}
+		
+	}
+
+	@Override
+	public List<Weather> updateAfter24HourWeather(City city) {
+		List<Weather> weathers = weatherDao.getWeather(city,
+				CommonUtil.getCurentHour(),
+				false, 24);
+		for(Weather w:weathers){
+			weatherDao.delete(w);
+		}
+		weathers = WeatherUtil.list24HourWeatherByArea(city.getCityName(), city.getId());
+		for(Weather w:weathers){
+			weatherDao.save(w);
 		}
 		return weathers;
 	}

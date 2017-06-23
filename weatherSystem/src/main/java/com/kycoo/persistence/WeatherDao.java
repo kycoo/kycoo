@@ -8,4 +8,5 @@ import com.kycoo.domain.Weather;
 
 public interface WeatherDao extends BaseDao<Weather, Integer> {
 	List<Weather> getWeather(City city,Date date,boolean isDay,int count);
+
 }

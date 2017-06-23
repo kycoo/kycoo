@@ -33,4 +33,8 @@ public abstract class BaseDaoHibernateAdapter<E, K extends Serializable> impleme
 		return sessionFactory.getCurrentSession().get(entityType, id);
 	}
 	
+	@Override
+	public void delete(E entity){
+		sessionFactory.getCurrentSession().delete(entity);
+	}
 }

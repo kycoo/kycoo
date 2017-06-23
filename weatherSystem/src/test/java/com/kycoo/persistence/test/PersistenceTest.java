@@ -1,5 +1,9 @@
 package com.kycoo.persistence.test;
 
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -13,10 +17,14 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.kycoo.domain.City;
 import com.kycoo.domain.Province;
+import com.kycoo.domain.Weather;
+import com.kycoo.persistence.WeatherDao;
+import com.kycoo.utils.CommonUtil;
+import com.kycoo.utils.WeatherUtil;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations={"classpath:app.xml"})
-public class TestPersistence {
+public class PersistenceTest {
 	@Autowired
 	SessionFactory sessionFactory;
 	private Transaction tx;
@@ -45,6 +53,20 @@ public class TestPersistence {
 	}
 	
 	@Test
+	public  void addWeather(){
+		List<Weather> weathers = WeatherUtil.listHalfMonthweather("成都", "");
+		List<Weather> ws = WeatherUtil.list24HourWeatherByArea("成都", "");
+		for(Weather w : weathers){
+//			session.save(w.getCity());
+			session.save(w);
+		}
+		for(Weather w : ws){
+			session.save(w);
+			
+		}
+	}
+	
+	@Test
 	public void testAddProv(){
 		Province p = new Province();
 		p.setId("123");
@@ -54,6 +76,26 @@ public class TestPersistence {
 		
 	}
 	
+	
+	@Autowired
+	WeatherDao weatherDao;
+	
+	@Test
+	public void getWeekWeatherByCity(){
+		City city = new City();
+		city.setId("101270101");
+		city.setCityName("成都");
+		Date date=CommonUtil.getTodayStartDate();
 		
+		List<Weather> weathers = session
+			.createQuery("from Weather as w where w.isDay = 1 and w.date >= ? and w.city = ?",Weather.class)
+			.setParameter(0, date)
+			.setParameter(1, city)
+			.setMaxResults(7)
+			.getResultList();
+		for(Weather w : weathers){
+			System.out.println(w.getDate().getTime());
+		}
+	}
 		
 }

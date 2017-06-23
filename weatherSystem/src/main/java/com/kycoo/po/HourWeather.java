@@ -1,7 +1,9 @@
 package com.kycoo.po;
 
+import java.util.Date;
+
 import com.kycoo.domain.Weather;
-import com.kycoo.utils.WeatherUtil;
+import com.kycoo.utils.CommonUtil;
 
 public class HourWeather implements GetWeatherAble{
 	private String weather_code;
@@ -53,11 +55,11 @@ public class HourWeather implements GetWeatherAble{
 	@Override
 	public Weather getWeatherFormObj() {
 		Weather w = new Weather();
-		w.setDate(WeatherUtil.convetString2Date(time));
+		w.setDate(CommonUtil.convetString2Date(time));
 		w.setHighTemp(temperature);
 		w.setWeather(weather);
 		w.setWindDirection(wind_direction);
-		
+		w.setUpDateTime(new Date());
 		return w;
 	}
 	

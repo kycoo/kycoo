@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 import com.kycoo.domain.Weather;
-import com.kycoo.utils.WeatherUtil;
+import com.kycoo.utils.CommonUtil;
 
 public class DayWeather implements Serializable,GetWeatherAble {
 	/**
@@ -146,13 +146,13 @@ public class DayWeather implements Serializable,GetWeatherAble {
 	public Weather getWeatherFormObj() {
 
 		Weather weather = new Weather();
-		weather.setDate(WeatherUtil.convetString2Date(getDay()));
+		weather.setDate(CommonUtil.convetString2Date(getDay()));
 		weather.setHighTemp(day_air_temperature);
 		weather.setLowTemp(night_air_temperature);
 		//weather.setQuality(quality);
 		weather.setWeather(day_weather);
 		weather.setWindDirection(day_wind_direction);
-		weather.setUpDateTime(new Date());
+		weather.setUpDateTime(CommonUtil.formatDate(new Date()));
 		return weather;
 	}
 	

@@ -7,14 +7,14 @@
 
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-		<title>欢迎使用</title>
+		<title>kycoo天气</title>
 
 		<!--利用meta标签对viewport(显示窗口)进行控制-->
 		<!--也就是 显示窗口 宽度 是 客户端的 屏幕 宽度 （就是 满屏 ！），显示的文字和图形的初始比例 是 1.0-->
 		<meta name="viewport" content="width=device-width,initial-scale=1" />
 
 		<!-- Style -->
-		<link rel="stylesheet" type="text/css" href="./css/style.css" />
+		<link rel="stylesheet" type="text/css" href="css/style.css" />
 
 	</head>
 
@@ -27,29 +27,16 @@
 		<!-- //Headng -->
 
 		<!-- Container -->
-		<div class="container">
-
-			<!-- City -->
 			<div class="city">
-				<div class="title">
-					<h2>北京市</h2>
-					<h3>北京</h3>
+			<div class="date-time">	
+				<div class="dmy">
+					<div id="sub">走势</div>
 				</div>
-				<div class="date-time">
-					<div class="dmy">
-						<div id="txt"></div>
-					</div>
-					<div class="temperature">
-						<p>20<span>℃</span></p>
-					</div>
-					<div class="clear"></div>
+				<div class="forecast">
+					<div id="txt"></div>
 				</div>
+			</div>	
 			</div>
-			<!-- //City -->
-
-			<div class="clear"></div>
-		</div>
-		<!-- //Container -->
 
 		<!--app网页加载时响应-->
 		<!--`type="application/x-javascript"` 中的 “x” 是“实验”的意思，这种声明有点老，但和 `type="application/javascript"` 一样，只是支持的浏览器更多一点-->

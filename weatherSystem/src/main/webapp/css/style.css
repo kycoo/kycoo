@@ -7,6 +7,14 @@
 	vertical-align: baseline;
 }
 
+<<<<<<< HEAD
+ul {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+=======
+>>>>>>> 7a62f0de97348e47402c83c9dc9c062a0cff1268
 
 
 /* start editing from here */
@@ -18,10 +26,22 @@ a {
 
 /* float left */
 
+<<<<<<< HEAD
+.clear {
+	clear: both;
+}
+
+
+/*-- Index-Page-Styling --*/
+
+body {
+	background: url("../images/background.jpg");
+=======
 /*-- Index-Page-Styling --*/
 
 body {
 	background: url("../images/back.jpg");
+>>>>>>> 7a62f0de97348e47402c83c9dc9c062a0cff1268
 	background-repeat: no-repeat;
 	background-attachment: fixed;
 	background-position: center;
@@ -40,6 +60,22 @@ h1 {
 }
 
 .container {
+<<<<<<< HEAD
+	width: 65%;
+	margin: 50px auto;
+	background-color: rgba(0, 0, 0, 0.73);
+}
+
+.city {
+	width: 60%;
+	float: left;
+	background: url("../images/city.jpg");
+	background-repeat: no-repeat;
+	background-size: cover;
+	-webkit-background-size: cover;
+	min-height: 500px;
+	position: relative;
+=======
 	margin: 0 auto;
 }
 
@@ -51,6 +87,7 @@ h1 {
 	background-repeat: no-repeat;
 	background-size: cover;
 	float:center;
+>>>>>>> 7a62f0de97348e47402c83c9dc9c062a0cff1268
 }
 
 .title {
@@ -59,10 +96,30 @@ h1 {
 	padding: 30px 30px 0 0;
 }
 
+<<<<<<< HEAD
+.title h2 {
+	color: #FFF;
+	font-size: 30px;
+}
+
+.title h3 {
+	font-size: 16px;
+	font-weight: 600;
+	color: #EEE;
+	margin-top: 10px;
+	text-align: right;
+}
+
+.date-time {
+	position: absolute;
+	bottom: 0;
+	color: #FFF;
+=======
 
 .date-time {
 	flaot:center;
 	color: white;
+>>>>>>> 7a62f0de97348e47402c83c9dc9c062a0cff1268
 	width: 90%;
 	padding: 0 30px 10px 30px;
 	font-family: 'Oxygen', sans-serif;
@@ -74,6 +131,9 @@ div #txt {
 	margin-bottom: 10px;
 	letter-spacing: 1px;
 }
+<<<<<<< HEAD
+
+=======
 div #sub{
 	font-size: 35px;
 	font-weight: 100;
@@ -86,11 +146,16 @@ div #sub{
 	text-align: right;
 	padding-top: 105px;
 }
+>>>>>>> 7a62f0de97348e47402c83c9dc9c062a0cff1268
 .dmy {
 	width: 50%;
 	float: left;
 	text-align: left;
+<<<<<<< HEAD
+	padding-top: 55px;
+=======
 	padding-top: 25px;
+>>>>>>> 7a62f0de97348e47402c83c9dc9c062a0cff1268
 }
 
 .temperature {

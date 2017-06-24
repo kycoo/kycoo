@@ -1,10 +1,14 @@
 package com.kycoo.service;
 
 
+import java.util.List;
+
 import com.kycoo.domain.City;
 
 public interface CityService {
-	City getCityById(String id);//ÊäÈë³ÇÊÐÃû²éÕÒ
+	City getCityById(String id);//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	
 	City getCityByName(String name);
+	
+	List<City> getAllCity();
 }

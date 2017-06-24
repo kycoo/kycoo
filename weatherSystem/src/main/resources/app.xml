@@ -23,7 +23,8 @@
 		<property name="url"
 			value="jdbc:mysql://localhost:3306/weather?useUnicode=true&amp;characterEncoding=utf8" />
 		<property name="username" value="root" />
-		<property name="password" value="123456" />
+		<property name="password" value="root" />
+		<!--  <property name="password" value="123456" />-->
 		<property name="initialSize" value="10" />
 		<property name="maxTotal" value="50" />
 		<property name="maxIdle" value="30" />
@@ -54,6 +55,7 @@
 	<!-- 配置声明式事务 -->
 	<tx:annotation-driven transaction-manager="transactionManager"/>
 	
+<<<<<<< HEAD
 	
 	<!-- spring整合quartz -->
     <!--<bean id="simpleJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">-->
@@ -117,4 +119,37 @@
                 <ref bean="mySecondCronTrigger"/>
             </list>
         </property>
+=======
+
+	<!-- 要执行任务的任务类。 -->
+    <bean id="updateWeather" class="com.kycoo.quartz.UpdateWeatherQuartz">
+    </bean>
+
+    <!-- 将需要执行的定时任务注入JOB中。 -->
+    <bean id="updateWeatherJob" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+        <property name="targetObject" ref="updateWeather"></property>
+        <!-- 任务类中需要执行的方法 -->
+        <property name="targetMethod" value="updateWeather"></property>
+        <!-- 上一次未执行完成的，要等待有再执行。 -->
+        <property name="concurrent" value="false"></property>
+    </bean>
+    <!-- 基本的定时器，会绑定具体的任务。 -->
+    <bean id="updateWeatherTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+        <property name="jobDetail" ref="updateWeatherJob"></property>
+        <!-- 
+        <property name="startDelay" value="3000"></property>
+        
+        <property name="repeatInterval" value="2000"></property>
+        -->
+        <property name="cronExpression" value="0 0 0 * * ?"/>
+    </bean>
+
+    <bean id="schedulerFactoryBean" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+        <property name="triggers">
+            <list>
+                <ref bean="updateWeatherTrigger"></ref>
+            </list>
+        </property>
+    </bean>
+>>>>>>> 476163023d7d3eb70d08fe729e1c11247baad22a
 </beans>

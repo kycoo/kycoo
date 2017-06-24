@@ -1,6 +1,5 @@
 package com.kycoo.service;
 
-import java.util.Date;
 import java.util.List;
 
 import com.kycoo.domain.City;

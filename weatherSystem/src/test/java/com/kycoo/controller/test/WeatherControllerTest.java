@@ -9,7 +9,6 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.web.bind.annotation.InitBinder;
 
 import com.alibaba.fastjson.JSON;
 import com.kycoo.domain.City;
@@ -30,7 +29,7 @@ public class WeatherControllerTest {
 	
 	@Before
 	public void init(){
-		cityName = "±±æ©";
+		cityName = "ÊàêÈÉΩ";
 	}
 	@After
 	public void result(){
@@ -60,7 +59,7 @@ public class WeatherControllerTest {
 	
 	@Test
 	public void testGet24HourWeather(){
-		cityName = "√‡—Ù";
+		cityName = "ÔøΩÔøΩÔøΩÔøΩ";
 		City city = cityService.getCityByName(cityName);
 		if(city != null){
 			List<Weather> weathers = weatherService.getAfter24HoursWeather(city);

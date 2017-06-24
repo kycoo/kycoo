@@ -23,6 +23,10 @@ public class CityServiceTest {
 	@Test
 	public void testGetCityByName(){
 		
-		cityService.getCityByName("³É¶¼");
+		cityService.getCityByName("ï¿½É¶ï¿½");
+	}
+	@Test
+	public void getAllCity(){
+		System.out.println(cityService.getAllCity().size());
 	}
 }

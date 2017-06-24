@@ -14,7 +14,7 @@ public class UpdateWeatherQuartz {
     public void updateWeather()  {  
     		new Date().setTime(1000);
         long ms = System.currentTimeMillis();  
-        cityService.getCityByName("æˆéƒ½");
+        cityService.getCityByName("³É¶¼");
     }  
 	
 }

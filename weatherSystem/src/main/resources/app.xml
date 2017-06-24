@@ -55,71 +55,7 @@
 	<!-- 配置声明式事务 -->
 	<tx:annotation-driven transaction-manager="transactionManager"/>
 	
-<<<<<<< HEAD
-	
-	<!-- spring整合quartz -->
-    <!--<bean id="simpleJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">-->
-        <!--<property name="targetObject" ref="myBean"/>-->
-        <!--<property name="targetMethod" value="printMessage"/>-->
-    <!--</bean>-->
 
-    <bean id="firstComplexJobDetail" class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
-        <property name="jobClass" value="com.snow.weather.quartz.FirstScheduledJob"/>
-        <property name="jobDataMap">
-            <!--suppress InjectionValueTypeInspection -->
-            <map>
-                <entry key="getDataByDay" value-ref="getDataByDay"/>
-            </map>
-        </property>
-        <property name="Durability" value="true"/>
-    </bean>
-
-    <bean id="secondComplexJobDetail" class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
-        <property name="jobClass" value="com.snow.weather.quartz.SecondScheduledJob"/>
-        <property name="jobDataMap">
-            <!--suppress InjectionValueTypeInspection -->
-            <map>
-                <entry key="getDataByHalfMonth" value-ref="getDataByHalfMonth"/>
-            </map>
-        </property>
-        <property name="Durability" value="true"/>
-    </bean>
-
-    <!--<bean id="mySmpleTrigger" class="org.springframework.scheduling.quartz.SimpleTriggerFactoryBean">-->
-        <!--<property name="jobDetail" ref="simpleJobDetail"/>-->
-        <!--<property name="startDelay" value="1000"/>-->
-        <!--<property name="repeatInterval" value="2000"/>-->
-    <!--</bean>-->
-
-    <bean id="myCronTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
-        <property name="jobDetail" ref="firstComplexJobDetail"/>
-        <property name="cronExpression" value="0/5 * * * * ?"/>
-        <property name="Priority" value="5"/>
-    </bean>
-
-    <bean id="mySecondCronTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
-        <property name="jobDetail" ref="secondComplexJobDetail"/>
-        <!--<property name="cronExpression" value="59 59 23 L * ?"/>-->
-        <property name="cronExpression" value="0/5 * * * * ?"/>
-        <property name="Priority" value="2"/>
-    </bean>
-
-    <bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
-        <property name="jobDetails">
-            <list>
-                <!--<ref bean="simpleJobDetail"/>-->
-                <ref bean="firstComplexJobDetail"/>
-                <ref bean="secondComplexJobDetail"/>
-            </list>
-        </property>
-        <property name="triggers">
-            <list>
-                <!--<ref bean="mySmpleTrigger"/>-->
-                <ref bean="myCronTrigger"/>
-                <ref bean="mySecondCronTrigger"/>
-            </list>
-        </property>
-=======
 
 	<!-- 要执行任务的任务类。 -->
     <bean id="updateWeather" class="com.kycoo.quartz.UpdateWeatherQuartz">
@@ -151,5 +87,4 @@
             </list>
         </property>
     </bean>
->>>>>>> 476163023d7d3eb70d08fe729e1c11247baad22a
 </beans>

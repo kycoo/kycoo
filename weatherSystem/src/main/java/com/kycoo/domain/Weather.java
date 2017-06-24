@@ -41,6 +41,16 @@ public class Weather implements Comparable<Weather>{
 	private Date upDateTime; //天气更新时间
 
 	private boolean isDay;//是不是某天的天气{t,f}
+	
+	private String imgUrl;
+	
+	public String getImgUrl() {
+		return imgUrl;
+	}
+
+	public void setImgUrl(String imgUrl) {
+		this.imgUrl = imgUrl;
+	}
 
 	public boolean isDay() {
 		return isDay;

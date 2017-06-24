@@ -10,6 +10,7 @@ import com.alibaba.fastjson.JSON;
 import com.kycoo.domain.City;
 import com.kycoo.service.CityService;
 import com.kycoo.service.WeatherService;
+import com.kycoo.vo.DayWeatherVO;
 
 @Controller
 public class WeatherController {
@@ -18,14 +19,16 @@ public class WeatherController {
 	WeatherService weatherService;
 	@Autowired
 	CityService cityService;
+	private DayWeatherVO weatherVO;
 	
-	@GetMapping(value="/localWeather", produces = "application/json;charset=utf-8")
+	@GetMapping(value="/searchWeather", produces = "application/json;charset=utf-8")
 	@ResponseBody
 	public String getTodayWeatherByCityName(String cityName){
 		City city = cityService.getCityByName(cityName);
 		if(city != null){
 			System.out.println(city.getCityName());
-			return JSON.toJSONString(weatherService.getTodayWeatherByCity(city));
+			weatherVO = new DayWeatherVO(weatherService.getTodayWeatherByCity(city));
+			return JSON.toJSONString(weatherVO);
 		}
 		return "城市不唯一";
 	}

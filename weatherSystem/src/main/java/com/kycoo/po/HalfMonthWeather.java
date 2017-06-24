@@ -246,6 +246,7 @@ public class HalfMonthWeather implements GetWeatherAble{
 		w.setWeather(day_weather);
 		w.setWindDirection(day_wind_direction);
 		w.setUpDateTime(CommonUtil.formatDate(new Date()));
+		w.setImgUrl(day_weather_pic);
 		return w;
 	}
 

@@ -82,10 +82,7 @@ var initData = function(data){
     option.series[0].data = data[1][0];
     option.series[1].data = data[1][1];
 }
-var CURRENT_CITY = {
-    id:"",
-    name:""
-}
+
  $(function(){
     var tempData=[
             [11, 11, 15, 13, 12, 13, 10,10],
@@ -98,6 +95,47 @@ var CURRENT_CITY = {
     var myChart = echarts.init(document.getElementById("chart"));
       // 为echarts对象加载数据
     myChart.setOption(option);
- })
 
-   
+
+    $(document).on('click', '#type>li', function(event) {
+        var currentTarget = event.currentTarget;
+        switch(currentTarget.id){
+            case "locat":
+                 break;
+            case "half-month":
+                break;
+            case "hours":
+                break;
+            default:
+                break;
+        }
+        $("#type>li").removeClass('active');
+        $(currentTarget).addClass('active');
+    });
+ }) 
+var CURRENT_CITY = {
+    id:"",
+    name:""
+}
+var getCurrentCityFromCook = function(){
+    CURRENT_CITY.id = $.cookes("city_id");
+    CURRENT_CITY.name = $.cookes("city_name");
+}
+var getTodayWather = function(){
+
+    $.getJSON('/path/to/file', {param1: 'value1'}, function(json, textStatus) {
+            
+    });
+
+
+}
+var search = function(){
+    var cityName = $("#cityName").val();
+    alert(cityName);
+}
+var getAfter24HoursWeather =  function(){
+
+}
+var getAfterHalfMonthWeather = function(){
+
+}

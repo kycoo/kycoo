@@ -123,7 +123,7 @@ var getCurrentCityFromCook = function(){
 }
 var getTodayWather = function(){
 
-    $.getJSON('/path/to/file', {param1: 'value1'}, function(json, textStatus) {
+    $.getJSON('afterHalfMonth', {param1: 'value1'}, function(json, textStatus) {
             
     });
 
@@ -134,7 +134,13 @@ var search = function(){
 //    alert(cityName);
 }
 var getAfter24HoursWeather =  function(){
+    $.getJSON('/searchWeather', {cityName: CURRENT_CITY.name}, function(json, textStatus) {
+            console.log(json);
+            var xAxis = [];
+            for(var w in json){
 
+            }
+    });
 }
 var getAfterHalfMonthWeather = function(){
 

@@ -13,24 +13,24 @@ import javax.persistence.Table;
 /**
  * 
  * @author 张汪
- *	描述天气实体
+ *	天气数据基本信息
  */
 @Entity
 @Table(name="tb_weather")
-public class Weather {
+public class Weather implements Comparable<Weather>{
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id; //天气编号，数据库唯一标示
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Integer id; //天气编号
 	
 	private Integer highTemp;
 	private Integer lowTemp;
 	
-	private Date date; //该时间的天气
+	private Date date; //天气对应的时间
 	
 	@ManyToOne
 	@JoinColumn(name="cid")
-	private City city; //城市;
+	private City city; //天气的时间
 	
 	private String weather;//天气
 	
@@ -38,7 +38,17 @@ public class Weather {
 	
 	private String windDirection;//风向
 	
-	private Date upDateTime; //获取天气的时间
+	private Date upDateTime; //天气更新时间
+
+	private boolean isDay;//是不是某天的天气{t,f}
+
+	public boolean isDay() {
+		return isDay;
+	}
+
+	public void setDay(boolean isDay) {
+		this.isDay = isDay;
+	}
 
 	public Integer getId() {
 		return id;
@@ -111,6 +121,12 @@ public class Weather {
 	public void setUpDateTime(Date upDateTime) {
 		this.upDateTime = upDateTime;
 	}
-	
+
+	@Override
+	public int compareTo(Weather o) {
+		return date.after(o.getDate()) ? 1 : 0;
+	}
+
+
 	
 }

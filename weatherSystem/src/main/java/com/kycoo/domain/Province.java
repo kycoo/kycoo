@@ -10,9 +10,9 @@ import javax.persistence.Table;
 public class Province {
 	@Id
 	@Column(length=10)
-	private String id; //省份id
+	private String id; //省份编号
 	
-	private String name; //省份名字
+	private String name; //省份名称
 
 	public String getId() {
 		return id;

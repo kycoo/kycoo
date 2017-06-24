@@ -1,5 +1,7 @@
 package com.kycoo.domain;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -11,16 +13,22 @@ import javax.persistence.Table;
  * 
  * @author 张汪
  *
- *	城市类，描述城市的基本信息
+ *	city基本数据信息
+ * @param <T>
  */
 
 @Entity
 @Table(name="tb_city")
-public class City {
+public class City implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@Column(length=10)
-	private String id;//城市id
+	private String id;//城市编号
 	
 	private String cityName;//城市名称
 	
@@ -29,7 +37,7 @@ public class City {
 	
 	@ManyToOne
 	@JoinColumn(name="pid")
-	private Province province; //省
+	private Province province; //省份
 
 	public Province getProvince() {
 		return province;
@@ -71,6 +79,7 @@ public class City {
 		this.latitude = latitude;
 	}
 
+	
 	
 	
 	

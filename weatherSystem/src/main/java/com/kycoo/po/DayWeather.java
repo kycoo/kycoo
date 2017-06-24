@@ -1,9 +1,12 @@
-package com.kycoo.utils;
-
+package com.kycoo.po;
 
 import java.io.Serializable;
+import java.util.Date;
 
-class DayWeather implements Serializable{
+import com.kycoo.domain.Weather;
+import com.kycoo.utils.CommonUtil;
+
+public class DayWeather implements Serializable,GetWeatherAble {
 	/**
 	 * 
 	 */
@@ -33,10 +36,10 @@ class DayWeather implements Serializable{
 	public void setNight_wind_direction(String night_wind_direction) {
 		this.night_wind_direction = night_wind_direction;
 	}
-	public String getNight_air_temperature() {
+	public Integer getNight_air_temperature() {
 		return night_air_temperature;
 	}
-	public void setNight_air_temperature(String night_air_temperature) {
+	public void setNight_air_temperature(Integer night_air_temperature) {
 		this.night_air_temperature = night_air_temperature;
 	}
 	public String getNight_weather_pic() {
@@ -87,10 +90,10 @@ class DayWeather implements Serializable{
 	public void setDay_weather_pic(String day_weather_pic) {
 		this.day_weather_pic = day_weather_pic;
 	}
-	public String getDay_air_temperature() {
+	public Integer getDay_air_temperature() {
 		return day_air_temperature;
 	}
-	public void setDay_air_temperature(String day_air_temperature) {
+	public void setDay_air_temperature(Integer day_air_temperature) {
 		this.day_air_temperature = day_air_temperature;
 	}
 	public String getDay_wind_direction() {
@@ -118,23 +121,39 @@ class DayWeather implements Serializable{
 		this.day = day;
 	}
 	
-	private String jiangshui;
-	private String air_press;
-	private String weekday;
-	private String night_wind_direction;
-	private String night_air_temperature;
-	private String night_weather_pic;
-	private String night_weather;
-	private String night_weather_code;
-	private String day_weather_code;
-	private String ziwaixian;
-	private String day_weather;
-	private String day_wind_power;
-	private String day_weather_pic;
-	private String day_air_temperature;
-	private String day_wind_direction;
-	private String night_wind_power;
-	private String sun_begin_end;
-	private String day;
+	private String jiangshui; //降水概率
+	private String air_press; //大气压
+	private String weekday; //星期几
+	private String night_wind_direction; //夜晚风向
+	private Integer night_air_temperature; //晚上天气温度(摄氏度)
+	private String night_weather_pic; //晚上天气图片
+	private String night_weather; //晚上天气
+	private String night_weather_code; //晚上天气编码
+	private String day_weather_code; //白天天气编码
+	private String ziwaixian; //紫外线
+	private String day_weather; //白天天气
+	private String day_wind_power; //白天风力
+	private String day_weather_pic; //白天天气图片
+	private Integer day_air_temperature; //白天温度
+	private String day_wind_direction; //白天风向
+	private String night_wind_power; //夜晚风力
+	private String sun_begin_end; //日出日落
+	private String day; //日期
+
+	
+	
+	@Override
+	public Weather getWeatherFormObj() {
+
+		Weather weather = new Weather();
+		weather.setDate(CommonUtil.convetString2Date(getDay()));
+		weather.setHighTemp(day_air_temperature);
+		weather.setLowTemp(night_air_temperature);
+		//weather.setQuality(quality);
+		weather.setWeather(day_weather);
+		weather.setWindDirection(day_wind_direction);
+		weather.setUpDateTime(CommonUtil.formatDate(new Date()));
+		return weather;
+	}
 	
 }

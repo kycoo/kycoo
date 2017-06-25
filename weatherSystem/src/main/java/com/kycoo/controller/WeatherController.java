@@ -5,12 +5,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -20,7 +18,6 @@ import com.kycoo.domain.City;
 import com.kycoo.domain.Weather;
 import com.kycoo.service.CityService;
 import com.kycoo.service.WeatherService;
-import com.kycoo.utils.CommonUtil;
 import com.kycoo.utils.WeatherUtil;
 import com.kycoo.vo.TodayWeather;
 import com.kycoo.vo.WeatherVO;

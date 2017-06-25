@@ -110,7 +110,7 @@ var paint = function(data){
         var currentTarget = event.currentTarget;
         switch(currentTarget.id){
             case "locat":
-                getCityWeather();
+                getCityWeather(CURRENT_CITY.name);
                 break;
             case "half-month":
             	getAfterHalfMonthWeather();
@@ -196,6 +196,8 @@ var getCityWeather = function(cityName){
     $("#today").css("display","block");
 
     $.getJSON('searchWeather', {cityName: cityName}, function(data, textStatus) {
+    	$("#type>li").removeClass('active');
+        $("#type>li").eq(0).addClass('active');
     	if( data.cityName == null ){
                 alert("未找到城市");
                 return;
@@ -210,7 +212,6 @@ var getCityWeather = function(cityName){
             CURRENT_CITY.name = data.cityName;
 
             setCurrentCityName(data.cityName);
-            $("#type>li").removeClass('active');
-            $("#type>li").eq(0).addClass('active');
+            
     });
 }

@@ -196,7 +196,7 @@ var getCityWeather = function(cityName){
     $("#today").css("display","block");
 
     $.getJSON('searchWeather', {cityName: cityName}, function(data, textStatus) {
-            if(data.length == 0){
+    	if( data.cityName == null ){
                 alert("未找到城市");
                 return;
             }

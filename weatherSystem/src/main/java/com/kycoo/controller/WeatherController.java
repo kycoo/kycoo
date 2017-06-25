@@ -72,7 +72,7 @@ public class WeatherController {
 			return JSON.toJSONString(w);
 		}
 		
-		return "城市不唯一";
+		return JSON.toJSONString(new TodayWeather());
 	}
 	
 	@GetMapping(value="/afterHalfMonth", produces = "application/json;charset=utf-8")

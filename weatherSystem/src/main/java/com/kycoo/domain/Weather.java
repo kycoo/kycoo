@@ -10,11 +10,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-/**
- * 
- * @author 张汪
- *	天气数据基本信息
- */
 @Entity
 @Table(name="tb_weather")
 public class Weather implements Comparable<Weather>{

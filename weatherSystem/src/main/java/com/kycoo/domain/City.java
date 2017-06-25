@@ -9,13 +9,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-/**
- * 
- * @author 张汪
- *
- *	city基本数据信息
- * @param <T>
- */
 
 @Entity
 @Table(name="tb_city")

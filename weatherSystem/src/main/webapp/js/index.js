@@ -1,7 +1,7 @@
- 
+
 var option = {
     title : {
-        text: '未来一周气温变化',
+        text: '天气变化',
         subtext: '纯属虚构'
     },
     tooltip : {
@@ -73,38 +73,50 @@ var option = {
     ]
 };
 var weekXAxisData = ['周一','周二','周三','周四','周五','周六','**', "-"]
+var myChart;
+var paint = function(data){
+	if(data.length > 0){
+		 //设置横坐标显示数据
+	    option.xAxis[0].data = data[0];
 
-var initData = function(data){
-    //设置横坐标显示数据
-    option.xAxis[0].data = data[0];
+	    //设置y值
+	    option.series[0].data = data[1][0];
+	    option.series[1].data = data[1][1];
+	}
+   
+    if(myChart != undefined){
+        myChart.setOption(option,true);
+    }
+    
 
-    //设置y值
-    option.series[0].data = data[1][0];
-    option.series[1].data = data[1][1];
 }
 
  $(function(){
-    var tempData=[
-            [11, 11, 15, 13, 12, 13, 10,10],
-            [1, -2, 2, 5, 3, 2, 0,10 ]
-    ];
-    var d=[weekXAxisData,tempData]
-    var xData = [11, 11, 15, 13, 12, 13, 10];
+    getCurrentCityFromCook();
+    // var tempData=[
+    //         [11, 11, 15, 13, 12, 13, 10,10],
+    //         [1, -2, 2, 5, 3, 2, 0,10 ]
+    // ];
+    // var d=[weekXAxisData,tempData]
+    // var xData = [11, 11, 15, 13, 12, 13, 10];
     
-    initData(d);
-    var myChart = echarts.init(document.getElementById("chart"));
+    // paint(d);
+    myChart = echarts.init(document.getElementById("chart"));
       // 为echarts对象加载数据
-    myChart.setOption(option);
+    //myChart.setOption(option);
 
-
+    getCityWeather("");
     $(document).on('click', '#type>li', function(event) {
         var currentTarget = event.currentTarget;
         switch(currentTarget.id){
             case "locat":
-                 break;
+                getCityWeather();
+                break;
             case "half-month":
+            	getAfterHalfMonthWeather();
                 break;
             case "hours":
+            	getAfter24HoursWeather();
                 break;
             default:
                 break;
@@ -112,39 +124,93 @@ var initData = function(data){
         $("#type>li").removeClass('active');
         $(currentTarget).addClass('active');
     });
+
+    $(document).on('click','#search',function(){
+        var name = $("#cityName").val();
+        getCityWeather(name);
+
+    })
  }) 
+
 var CURRENT_CITY = {
     id:"",
-    name:""
+    name:"成都"
 }
 var getCurrentCityFromCook = function(){
-    CURRENT_CITY.id = $.cookes("city_id");
-    CURRENT_CITY.name = $.cookes("city_name");
+    CURRENT_CITY.id = $.cookie("cityId");
+    CURRENT_CITY.name = $.cookie("cityName");
 }
-var getTodayWather = function(){
-
-    $.getJSON('afterHalfMonth', {param1: 'value1'}, function(json, textStatus) {
-            
-    });
-
-
-}
-var search = function(){
-    var cityName = $("#cityName").val();
-//    alert(cityName);
+var setCurrentCityName  = function(name=null){
+    if(name == null){
+        name = $.cookie("cityName");
+       
+    }
+     $("#currentCity").html("当前城市:"+ name)
 }
 var getAfter24HoursWeather =  function(){
-    $.getJSON('/searchWeather', {cityName: CURRENT_CITY.name}, function(json, textStatus) {
-            console.log(json);
-            var xAxis = [];
-            for(var w in json){
-
-            }
+    $("#chart").css("display","block");
+    $("#today").css("display","none");
+    $.getJSON('24HoursWeather', {cityName: CURRENT_CITY.name}, function(json, textStatus) {
+    	if(json.length == 0){
+    		alert("城市错误");
+    		return;
+    	}
+    	var xAxis = [];
+        var seriesMAX = [];
+        var seriesMIN = [];
+        for(var i = 0;i < json.length;i++){
+        	console.log(json[i].date);
+        	xAxis[i] = json[i].date;
+            seriesMAX[i] = json[i].highTemp;
+            seriesMIN[i] = json[i].lowTemp;
+        }
+        option.title.text = "24小时天气";
+        paint([xAxis,[seriesMAX,seriesMIN]]); 
     });
 }
-var getAfterHalfMonthWeather = function(){
 
+var getAfterHalfMonthWeather = function(){
+    $("#chart").css("display","block");
+    $("#today").css("display","none");
+	$.getJSON('afterHalfMonth', {cityName: CURRENT_CITY.name}, function(json, textStatus) {
+			if(json.length == 0){
+				alert("城市错误");
+	    		return;
+	    	}
+            var xAxis = [];
+            var seriesMAX = [];
+            var seriesMIN = [];
+            for(var i = 0;i < json.length;i++){
+            	console.log(json[i].date);
+            	xAxis[i] = json[i].date;
+                seriesMAX[i] = json[i].highTemp;
+                seriesMIN[i] = json[i].lowTemp;
+            }
+            option.title.text = "半月天气";
+            paint([xAxis,[seriesMAX,seriesMIN]]);
+
+    });
 }
-var getCityWeather = function(){
-	
+var getCityWeather = function(cityName){
+	$("#chart").css("display","none");
+    $("#today").css("display","block");
+
+    $.getJSON('searchWeather', {cityName: cityName}, function(data, textStatus) {
+            if(data.length == 0){
+                alert("未找到城市");
+                return;
+            }
+           
+            $("#temp").html("天气："+data.weather);
+            $("#highTemp").html("高温："+data.highTemp);
+            $("#lowTemp").html("低温："+data.lowTemp);
+            $("#winDirction").html("风向："+data.windDirection);
+            $("#lifeRate").html("生活指数："+data.lifeRate);
+            $("#weatherImg").attr("src",data.img);
+            CURRENT_CITY.name = data.cityName;
+
+            setCurrentCityName(data.cityName);
+            $("#type>li").removeClass('active');
+            $("#type>li").eq(0).addClass('active');
+    });
 }

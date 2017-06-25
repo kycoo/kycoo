@@ -24,7 +24,7 @@
 			    <div class="input-group">
 			      <input id="cityName" type="text" class="form-control" placeholder="请输入城市">
 			      <span class="input-group-btn">
-			        <button class="btn btn-default" type="button" onclick="javascript:search()">搜索</button>
+			        <button id="search" class="btn btn-default" type="button" >搜索</button>
 			      </span>
 			    </div><!-- /input-group -->
 			  </div><!-- /.col-lg-6 -->
@@ -33,7 +33,7 @@
 		<div class="row">
 			<div class="col-lg-8 col-lg-offset-2">
 				<div class="col-lg-2">
-					<div>当前城市：成都</div>	
+					<div id="currentCity">当前城市：成都</div>	
 					<ul id="type" class="nav nav-pills nav-stacked">
 						 <li id="locat" role="presentation" class="active"><a href="#">今日天气</a></li>
 						 <li id="half-month" role="presentation"><a href="#">未来15天</a></li>
@@ -41,6 +41,27 @@
 					</ul>
 				</div>
 				<div class="col-lg-10">
+					<div id="today">
+						<div class="row">
+							<div class="col-lg-4">
+								<ul class="list-group">
+								  <li id="temp" class="list-group-item">天气：</li>
+								  <li id="highTemp" class="list-group-item">高温：</li>
+								  <li id="lowTemp" class="list-group-item">低温：</li>
+								  <li id="winDirction" class="list-group-item">风向：</li>
+								  <li id="lifeRate" class="list-group-item">生活指数：</li> 
+								  <!-- <li id="temp" class="list-group-item"></li>
+								  <li id="highTemp" class="list-group-item"></li>
+								  <li id="lowTemp" class="list-group-item"></li>
+								  <li id="winDirction" class="list-group-item"></li>
+								  <li id="lifeRate" class="list-group-item"></li> -->
+								</ul>
+							</div>
+							<div class="col-lg-4">
+								<img id="weatherImg" src="http://app1.showapi.com/weather/icon/day/07.png" alt="" class="img-thumbnail">
+							</div>
+						</div>
+					</div>
 					<div id="chart"></div>
 				</div>
 			</div>

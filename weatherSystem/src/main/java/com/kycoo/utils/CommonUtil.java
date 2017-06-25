@@ -46,4 +46,15 @@ public final class CommonUtil {
 //		calendar.set(Calendar.MINUTE, Cla);
 		return null;
 	}
+	public static String getDay(Date date) {
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(date);
+		return calendar.get(Calendar.DAY_OF_MONTH)+"";
+	}
+	
+	public static String getHour(Date date){
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(date);
+		return calendar.get(Calendar.HOUR_OF_DAY)+"";
+	}
 }
